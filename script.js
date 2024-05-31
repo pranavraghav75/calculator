@@ -1,5 +1,5 @@
 const display = document.querySelector(".display");
-const displayText = document.createElement("p");
+let displayText = document.createElement("p");
 displayText.textContent = "0.0";
 display.appendChild(displayText)
 
@@ -26,40 +26,51 @@ for(let i = 0; i < buttons.length; i++){
         }
     });
 }
-// for(button in buttons){
-//     button.onClick = () => alert("hi");
-// }
-// dipslayText.textContent = (current + button.textContent);
 
-function add(x, y){
-    return x + y;
-}
+const clear = document.querySelector("#clear");
+clear.addEventListener("click", () => {
+    if(!change){
+        displayText = document.createElement("p");
+        displayText.textContent = "0.0";
+        display.appendChild(displayText)
+        display.removeChild(newDisplay)
+        change = true;
+    }
+});
 
-function subtract(x, y){
-    return x - y;
-}
+const equal = document.querySelector(".equal");
+equal.addEventListener("click", () => {
+    let subArray = newDisplay.textContent.split(" ");
+    console.log(subArray.length)
+    if(subArray.length == 3){
+        let error = false;
+        let result = operate(subArray, error)
+        if(error){
+            result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000
+        }
+        newDisplay.textContent = result;
+    }
+});
 
-function multiply(x, y){
-    return x*y;
-}
+function operate(subArray, error){
+    let operator = subArray[1];
+    let x = subArray[0];
+    let y = subArray[2];
 
-function divide(x, y){
-    return x/y;
-}
-
-let x = 0;
-let y = 0;
-let operator = "";
-
-function operate(x, y, operator){
     switch(operator) {
         case "+":
-            return add(x, y);
+            return parseInt(x) + parseInt(y);
         case "-":
-            return subtract(x, y);
-        case "*":
-            return multiply(x, y);
+            return x - y;
+        case "x":
+            return x*y;
         case "/":
-            return divide(x, y);
+            if(y == 0){
+                alert("arithmetic error, cannot divide by 0")
+                error = true;
+                return "PRESS CLEAR";
+            } else {
+                return x/y;
+            }
     }
 }

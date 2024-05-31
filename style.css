@@ -9,6 +9,7 @@
     width: 415px;
     margin-top: 120px;
     padding-bottom: 10px;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .display {
@@ -20,6 +21,7 @@
     height: 45px;
     margin-top: 20px;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .keypad{
@@ -57,6 +59,8 @@ p{
     font-size: 45px;
     font-weight: 800;
     display: inline;
+    font-family: "Digital 7", sans-serif;
+    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif */
 }
 
 #clearText {
