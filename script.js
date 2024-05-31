@@ -1,6 +1,35 @@
-// const display = document.getElementsByClassName(".display")
-// const div = document.createElement("div")
-// display.appendChild(div);
+const display = document.querySelector(".display");
+const displayText = document.createElement("p");
+displayText.textContent = "0.0";
+display.appendChild(displayText)
+
+let newDisplay;
+
+const buttons = document.querySelectorAll(".type");
+let change = true;
+
+for(let i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener("click", () => {
+        if(change){
+            display.removeChild(displayText);
+            newDisplay = document.createElement("p");
+            newDisplay.textContent = buttons[i].textContent;
+            display.appendChild(newDisplay)
+            change = false;
+        } else {
+            let current = newDisplay.textContent;
+            if(buttons[i].getAttribute("id") == "operators"){
+                newDisplay.textContent = (current + " " + buttons[i].textContent) + " ";
+            } else {
+                newDisplay.textContent = (current + buttons[i].textContent);
+            }
+        }
+    });
+}
+// for(button in buttons){
+//     button.onClick = () => alert("hi");
+// }
+// dipslayText.textContent = (current + button.textContent);
 
 function add(x, y){
     return x + y;
