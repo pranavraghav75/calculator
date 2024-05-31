@@ -30,7 +30,6 @@
 }
 
 .keypad div{
-    /* background-color: lightgray; */
     background-color: orange;
 
     width: 80px;
@@ -60,7 +59,6 @@ p{
     font-weight: 800;
     display: inline;
     font-family: "Digital 7", sans-serif;
-    /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif */
 }
 
 #clearText {
