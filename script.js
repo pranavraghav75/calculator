@@ -4,6 +4,7 @@ displayText.textContent = "0.0";
 display.appendChild(displayText)
 
 let newDisplay;
+let allow = true;
 
 const buttons = document.querySelectorAll(".type");
 let change = true;
@@ -19,6 +20,7 @@ for(let i = 0; i < buttons.length; i++){
         } else {
             let current = newDisplay.textContent;
             if(buttons[i].getAttribute("id") == "operators"){
+                allow = true;
                 newDisplay.textContent = (current + " " + buttons[i].textContent) + " ";
             } else {
                 newDisplay.textContent = (current + buttons[i].textContent);
@@ -35,42 +37,77 @@ clear.addEventListener("click", () => {
         display.appendChild(displayText)
         display.removeChild(newDisplay)
         change = true;
+        allow = true;
+        error = false;
     }
 });
 
-const equal = document.querySelector(".equal");
+const equal = document.querySelector("#equal");
+let error;
 equal.addEventListener("click", () => {
     let subArray = newDisplay.textContent.split(" ");
-    console.log(subArray.length)
     if(subArray.length == 3){
-        let error = false;
-        let result = operate(subArray, error)
-        if(error){
-            result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000
+        let result = operate(subArray)
+        if(!error){
+            result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
+        } else {
+            result = "PRESS CLEAR";
         }
         newDisplay.textContent = result;
+        allow = true;
     }
 });
 
-function operate(subArray, error){
+function operate(subArray){
     let operator = subArray[1];
     let x = subArray[0];
     let y = subArray[2];
 
     switch(operator) {
         case "+":
-            return parseInt(x) + parseInt(y);
+            return parseFloat(x) + parseFloat(y);
         case "-":
             return x - y;
         case "x":
             return x*y;
         case "/":
             if(y == 0){
-                alert("arithmetic error, cannot divide by 0")
                 error = true;
+                alert("arithmetic error, cannot divide by 0")
                 return "PRESS CLEAR";
             } else {
                 return x/y;
             }
     }
 }
+
+const decimal = document.querySelector(".decimal");
+decimal.addEventListener("click", () => {
+    if(allow){
+        let current = newDisplay.textContent;
+        newDisplay.textContent = (current + ".");
+        allow = false;
+    }
+});
+
+const backspace = document.querySelector("#backspace");
+backspace.addEventListener("click", () => {
+    if(!display.firstChild.textContent == "0.0"){
+        let current = newDisplay.textContent;
+        const base = "+-x/";
+        let prev = current.charAt(current.length - 1);
+
+        if(prev == "."){
+            allow = true;
+        }
+
+        if(base.includes(prev)){
+            newDisplay.textContent = current.substring(0, current.length - 2);
+        } else if(current.charAt(current.length - 1) == " "){
+            newDisplay.textContent = current.substring(0, current.length - 3);
+        } else {
+            newDisplay.textContent = current.substring(0, current.length - 1);
+        }
+    }
+});
+

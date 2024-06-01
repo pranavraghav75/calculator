@@ -1,3 +1,3 @@
 # calculator
 
-calculator app utilizing javascript and DOM manipulation
+Calculator app utilizing javascript and DOM manipulation

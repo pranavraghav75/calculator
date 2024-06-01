@@ -24,19 +24,16 @@
     overflow: hidden;
 }
 
+p{
+    font-size: 45px;
+    font-weight: 800;
+    display: inline;
+    font-family: "Digital 7", sans-serif;
+}
+
 .keypad{
     width: 90%;
     margin: auto;
-}
-
-.keypad div{
-    background-color: orange;
-
-    width: 80px;
-    height: auto;
-    display: inline-block;
-    margin: 5px;
-    text-align:center;
 }
 
 .keypad button{
@@ -54,21 +51,20 @@ h3{
     vertical-align: middle;
 }
 
-p{
-    font-size: 45px;
-    font-weight: 800;
-    display: inline;
-    font-family: "Digital 7", sans-serif;
-}
-
 #clearText {
     font-size: 30px;
 }
 
 #clear {
     background-color: rgb(213, 53, 85);
+    width: 80px;
 }
 
 #operators {
     background-color: rgb(36, 95, 204);
+}
+
+#equal {
+    background-color: rgb(36, 95, 204);
+    width: 267.5px;
 }
